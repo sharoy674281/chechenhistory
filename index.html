@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A multilingual, evidence-led digital book of Chechen history from antiquity to the present.">
+  <meta name="theme-color" content="#182019">
+  <title>Tsjetsjensk historie — en rekonstruksjon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,600;0,700;1,500&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/history-core.js"></script>
+  <script defer src="js/content.js"></script>
+  <script defer src="js/search-core.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the book</a>
+
+  <header class="site-header" id="site-header">
+    <a class="wordmark" href="#top" aria-label="Home">
+      <span class="wordmark-rule" aria-hidden="true"></span>
+      <span><strong id="site-title">Tsjetsjensk historie</strong><small id="site-subtitle">En rekonstruksjon i kilder og minne</small></span>
+    </a>
+
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">Meny</button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+      <a href="#chronicle" data-ui="navChronicle">Krøniken</a>
+      <a href="#timeline" data-ui="navTimeline">Tidslinje</a>
+      <a href="#method" data-ui="navMethod">Metode</a>
+      <a href="#sources" data-ui="navSources">Kilder</a>
+    </nav>
+
+    <div class="header-tools">
+      <div class="global-search-wrap">
+        <label class="search-label" for="global-search"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search</span></label>
+        <input id="global-search" type="search" autocomplete="off" spellcheck="false" aria-controls="search-results" aria-expanded="false" placeholder="Søk i hele historien…">
+        <div id="search-results" class="search-results" role="listbox" hidden></div>
+      </div>
+      <div class="language-switcher" role="group" aria-label="Language">
+        <div class="language-buttons">
+          <button type="button" data-lang="no" aria-pressed="true">NO</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+        </div>
+        <select class="language-select" id="language-select" aria-label="Språk">
+          <option value="no">NO</option><option value="en">EN</option><option value="ru">RU</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="hero-kicker" data-ui="scopeSpan">ca. 1200 f.Kr. — august 2026</p>
+        <h1 id="hero-title">Historien som overlevde</h1>
+        <p id="hero-deck" class="hero-deck">Fra de første sporene i jorden til en levende diaspora — en bok om det vi vet, det vi husker og det vi fortsatt leter etter.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#chapter-reader" data-action="begin" data-ui="begin">Begynn å lese</a>
+          <a class="quiet-action" href="#timeline" data-action="timeline" data-ui="explore">Utforsk tidslinjen</a>
+        </div>
+        <p class="hero-note" id="hero-note">12 kapitler · 34 hendelser · kildehenvisninger ved teksten</p>
+      </div>
+      <figure class="hero-art">
+        <img id="hero-image" src="assets/chechen-mountain-chronicle.png" alt="Illustrert tsjetsjensk fjellandskap med steintårn" width="1536" height="1024">
+        <figcaption data-ui="imageCaption">Fjelltårn, daler og minnets veier</figcaption>
+      </figure>
+    </section>
+
+    <section class="editorial-note" aria-label="Editorial note">
+      <p class="opening-line" id="opening-line">Historie overlever i lag.</p>
+      <p id="opening-note">Denne boken holder bevisene ved siden av fortellingen: arkeologi, skriftlige arkiver, materiell kultur og muntlig minne.</p>
+      <div id="confidence-legend" class="confidence-legend" aria-label="Evidence labels"></div>
+    </section>
+
+    <section class="chronicle" id="chronicle" aria-labelledby="chronicle-title">
+      <header class="section-opening">
+        <p class="section-number">I</p>
+        <div><h2 id="chronicle-title" data-ui="navChronicle">Krøniken</h2><p data-ui="chronicleIntro">Fire bind. Tolv kapitler. Én historie som fortsatt er åpen for rettelser.</p></div>
+      </header>
+      <div class="reading-layout">
+        <aside class="contents-panel" aria-labelledby="contents-title">
+          <div class="contents-heading"><p id="contents-title">Innhold</p><button id="expand-all" type="button">Åpne alle</button></div>
+          <nav id="contents-nav" aria-label="Book contents"></nav>
+        </aside>
+        <div id="chapter-reader" class="chapter-reader" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
+      <header class="section-opening inverse">
+        <p class="section-number">II</p>
+        <div><h2 id="timeline-title" data-ui="navTimeline">Tidslinje</h2><p data-ui="timelineIntro">Hendelser presenteres ikke som like sikre. Følg hendelsen inn i kapittelet og videre til kilden.</p></div>
+      </header>
+      <div id="timeline-list" class="timeline-list"></div>
+    </section>
+
+    <section class="method-section" id="method" aria-labelledby="method-title">
+      <div class="method-statement">
+        <p class="section-number">III</p>
+        <h2 id="method-title">Historie i lag</h2>
+        <p id="method-body"></p>
+      </div>
+      <div class="source-layers" aria-label="Source layers">
+        <div><strong data-ui="earth">Jord</strong><small data-ui="earthNote">arkeologi · landskap · gjenstander</small></div>
+        <div><strong data-ui="textLayer">Tekst</strong><small data-ui="textLayerNote">krøniker · arkiver · rettsdokumenter</small></div>
+        <div><strong data-ui="voice">Stemme</strong><small data-ui="voiceNote">sanger · slektslinjer · vitnesbyrd</small></div>
+        <div><strong data-ui="crossReading">Krysslesning</strong><small data-ui="crossReadingNote">der uavhengige lag møtes</small></div>
+      </div>
+    </section>
+
+    <section class="sources-section" id="sources" aria-labelledby="sources-title">
+      <header class="section-opening">
+        <p class="section-number">IV</p>
+        <div><h2 id="sources-title" data-ui="navSources">Kilder</h2><p id="sources-intro"></p></div>
+      </header>
+      <div id="source-cabinet" class="source-cabinet"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p data-ui="footerText">Tsjetsjensk historie · En levende rekonstruksjon · Oppdatert august 2026</p><a href="#top" data-ui="backToTop">Tilbake til fjellet</a></footer>
+  <noscript><p class="noscript">JavaScript is required for the multilingual book and search.</p></noscript>
+</body>
+</html>
