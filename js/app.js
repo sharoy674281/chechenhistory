@@ -148,6 +148,8 @@
       q('#global-search').placeholder = tx().searchPlaceholder;
       q('#language-select').value = state.lang;
       q('#language-select').setAttribute('aria-label', state.lang === 'ru' ? 'Язык' : state.lang === 'en' ? 'Language' : 'Språk');
+      q('#menu-toggle').textContent = tr(content.ui.menu);
+      q('.site-footer a').textContent = `${tr(content.ui.backToTop)} ↑`;
       qa('[data-lang]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.lang === state.lang)));
       qa('[data-nav-label]').forEach((link) => { link.textContent = tx()[link.dataset.navLabel]; });
       q('.museum-edition span:first-child').textContent = tx().museum;
@@ -353,7 +355,11 @@
         renderPeriods(); renderTimeline();
         scrollToTarget('timeline');
       }
-      if (button.dataset.selectEvent) { state.eventId = button.dataset.selectEvent; renderTimeline(); }
+      if (button.dataset.selectEvent) {
+        state.eventId = button.dataset.selectEvent;
+        renderTimeline();
+        requestAnimationFrame(() => scrollToTarget('timeline-detail'));
+      }
       if (button.dataset.openEvent) openEntity(`event-${button.dataset.openEvent}`);
       if (button.dataset.openEntity) openEntity(button.dataset.openEntity);
       if (button.dataset.target) { event.preventDefault(); scrollToTarget(button.dataset.target); }
