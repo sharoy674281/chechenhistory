@@ -33,3 +33,10 @@ test('source links permit http urls and local anchors only', () => {
   assert.equal(app.safeHref('#method'), '#method');
   assert.equal(app.safeHref('javascript:alert(1)'), '#');
 });
+
+test('targetFromHash recognises museum entity destinations', () => {
+  for (const value of ['#exhibition-aardakh-exhibition', '#chapter-aardakh', '#event-deportation', '#person-zelimkhan', '#place-grozny', '#source-ussr1944']) {
+    assert.equal(app.targetFromHash(value), value.slice(1));
+  }
+  assert.equal(app.targetFromHash('#unknown-value'), null);
+});
