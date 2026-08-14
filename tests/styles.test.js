@@ -18,12 +18,11 @@ test('stylesheet carries the accessibility and responsive visual contract', () =
   assert.match(css, /@media\s*\(max-width:\s*720px\)[\s\S]*?\.language-select\s*\{[^}]*display:\s*block/s, 'mobile compact language control must be visible');
 });
 
-test('page shell uses an inline reader and one global search instead of the old dialog and era scroller', () => {
+test('page shell is a curated museum with a separate reading room', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  assert.match(html, /id="global-search"/);
-  assert.match(html, /id="search-results"/);
-  assert.match(html, /id="chapter-reader"/);
-  assert.doesNotMatch(html, /<dialog\b/);
-  assert.doesNotMatch(html, /id="era-rail"/);
-  assert.doesNotMatch(html, /class="read-progress"/);
+  for (const id of ['museum-home', 'opening-exhibition', 'period-index', 'curated-gallery', 'archive-search', 'reader-room', 'reader-contents', 'reader-article', 'reader-context', 'timeline-track']) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+  assert.doesNotMatch(html, /class="hero"/);
+  assert.doesNotMatch(html, /chechen-mountain-chronicle\.png/);
 });

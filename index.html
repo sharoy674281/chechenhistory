@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A multilingual, evidence-led digital book of Chechen history from antiquity to the present.">
-  <meta name="theme-color" content="#182019">
-  <title>Tsjetsjensk historie — en rekonstruksjon</title>
+  <meta name="description" content="A multilingual digital museum and source-led archive of Chechen history.">
+  <meta name="theme-color" content="#101713">
+  <title>Tsjetsjensk historisk arkiv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,600;0,700;1,500&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script defer src="js/i18n.js"></script>
   <script defer src="js/history-core.js"></script>
@@ -18,26 +18,27 @@
   <script defer src="js/app.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to the book</a>
+  <a class="skip-link" href="#main">Skip to the museum</a>
 
   <header class="site-header" id="site-header">
-    <a class="wordmark" href="#top" aria-label="Home">
-      <span class="wordmark-rule" aria-hidden="true"></span>
-      <span><strong id="site-title">Tsjetsjensk historie</strong><small id="site-subtitle">En rekonstruksjon i kilder og minne</small></span>
+    <a class="wordmark" href="#museum-home" aria-label="Museum home">
+      <span class="wordmark-seal" aria-hidden="true">N</span>
+      <span><strong id="site-title">Tsjetsjensk historisk arkiv</strong><small id="site-subtitle">Museum · krønike · kilder</small></span>
     </a>
 
     <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">Meny</button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
-      <a href="#chronicle" data-ui="navChronicle">Krøniken</a>
-      <a href="#timeline" data-ui="navTimeline">Tidslinje</a>
-      <a href="#method" data-ui="navMethod">Metode</a>
-      <a href="#sources" data-ui="navSources">Kilder</a>
+      <a href="#museum-home" data-nav-label="exhibitions">Utstillinger</a>
+      <a href="#timeline" data-nav-label="timeline">Tidslinje</a>
+      <a href="#people" data-nav-label="people">Personer</a>
+      <a href="#places" data-nav-label="places">Steder</a>
+      <a href="#sources" data-nav-label="sources">Kilder</a>
     </nav>
 
     <div class="header-tools">
       <div class="global-search-wrap">
         <label class="search-label" for="global-search"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search</span></label>
-        <input id="global-search" type="search" autocomplete="off" spellcheck="false" aria-controls="search-results" aria-expanded="false" placeholder="Søk i hele historien…">
+        <input id="global-search" type="search" autocomplete="off" spellcheck="false" aria-controls="search-results" aria-expanded="false" placeholder="Søk i arkivet…">
         <div id="search-results" class="search-results" role="listbox" hidden></div>
       </div>
       <div class="language-switcher" role="group" aria-label="Language">
@@ -54,57 +55,70 @@
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="hero-kicker" data-ui="scopeSpan">ca. 1200 f.Kr. — august 2026</p>
-        <h1 id="hero-title">Historien som overlevde</h1>
-        <p id="hero-deck" class="hero-deck">Fra de første sporene i jorden til en levende diaspora — en bok om det vi vet, det vi husker og det vi fortsatt leter etter.</p>
-        <div class="hero-actions">
-          <a class="primary-action" href="#chapter-reader" data-action="begin" data-ui="begin">Begynn å lese</a>
-          <a class="quiet-action" href="#timeline" data-action="timeline" data-ui="explore">Utforsk tidslinjen</a>
+    <section class="museum-home" id="museum-home" aria-label="Curated exhibitions">
+      <div class="museum-edition" aria-hidden="true"><span>Digitalt museum</span><span>Utgave 01 · 2026</span></div>
+      <article class="opening-exhibition" id="opening-exhibition" aria-live="polite">
+        <div class="fallback-exhibition-copy">
+          <p>Utstilling 01 · 1944–1957</p>
+          <h1>Aardakh: Deportasjon og tilbakekomst</h1>
+          <p>Dokumenter, ruter, eksil og hjemkomst.</p>
         </div>
-        <p class="hero-note" id="hero-note">12 kapitler · 34 hendelser · kildehenvisninger ved teksten</p>
-      </div>
-      <figure class="hero-art">
-        <img id="hero-image" src="assets/chechen-mountain-chronicle.png" alt="Illustrert tsjetsjensk fjellandskap med steintårn" width="1536" height="1024">
-        <figcaption data-ui="imageCaption">Fjelltårn, daler og minnets veier</figcaption>
-      </figure>
-    </section>
+      </article>
 
-    <section class="editorial-note" aria-label="Editorial note">
-      <p class="opening-line" id="opening-line">Historie overlever i lag.</p>
-      <p id="opening-note">Denne boken holder bevisene ved siden av fortellingen: arkeologi, skriftlige arkiver, materiell kultur og muntlig minne.</p>
-      <div id="confidence-legend" class="confidence-legend" aria-label="Evidence labels"></div>
-    </section>
+      <nav class="period-index" id="period-index" aria-label="Historical periods"></nav>
 
-    <section class="chronicle" id="chronicle" aria-labelledby="chronicle-title">
-      <header class="section-opening">
-        <p class="section-number">I</p>
-        <div><h2 id="chronicle-title" data-ui="navChronicle">Krøniken</h2><p data-ui="chronicleIntro">Fire bind. Tolv kapitler. Én historie som fortsatt er åpen for rettelser.</p></div>
-      </header>
-      <div class="reading-layout">
-        <aside class="contents-panel" aria-labelledby="contents-title">
-          <div class="contents-heading"><p id="contents-title">Innhold</p><button id="expand-all" type="button">Åpne alle</button></div>
-          <nav id="contents-nav" aria-label="Book contents"></nav>
-        </aside>
-        <div id="chapter-reader" class="chapter-reader" aria-live="polite"></div>
-      </div>
+      <section class="curated-section" aria-labelledby="curated-heading">
+        <header class="museum-section-heading"><p>Fra samlingen</p><h2 id="curated-heading">Historier, mennesker og dokumenter</h2></header>
+        <div class="curated-gallery" id="curated-gallery"></div>
+      </section>
+
+      <section class="archive-search" id="archive-search" aria-labelledby="archive-search-title">
+        <p class="archive-index">Arkiv · 1200 f.Kr.–2026</p>
+        <h2 id="archive-search-title">Finn et navn, sted, årstall eller dokument</h2>
+        <button type="button" data-focus-search>Åpne søket <span aria-hidden="true">→</span></button>
+      </section>
     </section>
 
     <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
-      <header class="section-opening inverse">
-        <p class="section-number">II</p>
-        <div><h2 id="timeline-title" data-ui="navTimeline">Tidslinje</h2><p data-ui="timelineIntro">Hendelser presenteres ikke som like sikre. Følg hendelsen inn i kapittelet og videre til kilden.</p></div>
+      <header class="timeline-heading">
+        <div><p>Kronologi</p><h2 id="timeline-title">Tidslinje</h2></div>
+        <p id="timeline-intro">Velg en periode og undersøk hendelsene i sammenheng.</p>
+        <div class="timeline-controls" aria-label="Timeline navigation">
+          <button type="button" data-timeline-previous aria-label="Previous events">←</button>
+          <button type="button" data-timeline-next aria-label="Next events">→</button>
+        </div>
       </header>
-      <div id="timeline-list" class="timeline-list"></div>
+      <nav id="timeline-periods" class="timeline-periods" aria-label="Timeline periods"></nav>
+      <div class="timeline-track" id="timeline-track" tabindex="0"></div>
+      <article class="timeline-detail" id="timeline-detail" aria-live="polite"></article>
+    </section>
+
+    <section class="reader-room" id="reader-room" aria-labelledby="reader-room-title">
+      <header class="reader-room-heading">
+        <p id="reader-room-kicker">Leserom</p>
+        <h2 id="reader-room-title">Historisk artikkel</h2>
+        <p id="reader-room-deck">Velg en utstilling, periode eller hendelse for å begynne.</p>
+      </header>
+      <div class="reader-layout">
+        <aside class="reader-contents" id="reader-contents" aria-label="Article contents"></aside>
+        <article class="reader-article" id="reader-article" tabindex="-1"></article>
+        <aside class="reader-context" id="reader-context" aria-label="Images, facts, and related material"></aside>
+      </div>
+    </section>
+
+    <section class="entity-index" id="people" aria-labelledby="people-title">
+      <header><p>Register</p><h2 id="people-title">Personer</h2></header>
+      <div id="people-index"></div>
+    </section>
+
+    <section class="entity-index" id="places" aria-labelledby="places-title">
+      <header><p>Geografi</p><h2 id="places-title">Steder</h2></header>
+      <div id="places-index"></div>
     </section>
 
     <section class="method-section" id="method" aria-labelledby="method-title">
-      <div class="method-statement">
-        <p class="section-number">III</p>
-        <h2 id="method-title">Historie i lag</h2>
-        <p id="method-body"></p>
-      </div>
+      <header><p>Redaksjonell metode</p><h2 id="method-title">Hvordan historien er rekonstruert</h2></header>
+      <p id="method-body"></p>
       <div class="source-layers" aria-label="Source layers">
         <div><strong data-ui="earth">Jord</strong><small data-ui="earthNote">arkeologi · landskap · gjenstander</small></div>
         <div><strong data-ui="textLayer">Tekst</strong><small data-ui="textLayerNote">krøniker · arkiver · rettsdokumenter</small></div>
@@ -114,15 +128,15 @@
     </section>
 
     <section class="sources-section" id="sources" aria-labelledby="sources-title">
-      <header class="section-opening">
-        <p class="section-number">IV</p>
-        <div><h2 id="sources-title" data-ui="navSources">Kilder</h2><p id="sources-intro"></p></div>
-      </header>
+      <header><p>Bibliografi og arkiver</p><h2 id="sources-title">Kilder</h2><span id="sources-intro"></span></header>
       <div id="source-cabinet" class="source-cabinet"></div>
     </section>
   </main>
 
-  <footer class="site-footer"><p data-ui="footerText">Tsjetsjensk historie · En levende rekonstruksjon · Oppdatert august 2026</p><a href="#top" data-ui="backToTop">Tilbake til fjellet</a></footer>
-  <noscript><p class="noscript">JavaScript is required for the multilingual book and search.</p></noscript>
+  <footer class="site-footer">
+    <p data-ui="footerText">Tsjetsjensk historie · En levende rekonstruksjon · Oppdatert august 2026</p>
+    <a href="#museum-home">Til toppen ↑</a>
+  </footer>
+  <noscript><p class="noscript">JavaScript is required for the multilingual museum, search, and timeline.</p></noscript>
 </body>
 </html>
