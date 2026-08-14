@@ -239,28 +239,55 @@
   const media = [
     {
       id: 'khaibakh-1888', chapterId: 'durdzuk', sectionId: 'durdzuk-1', src: 'assets/documentary/khaibakh-1888.jpg', sourceId: 'khaibakh-drawing',
+      kind: 'drawing', creator: 'Vsevolod Miller', date: '1888', collection: 'Wikimedia Commons',
       sourceUrl: 'https://commons.wikimedia.org/wiki/File:Башенный_поселок_Хайбах._Рисунок_Вс_Миллера_(1888).jpg', license: 'Public domain', attribution: 'Vsevolod Miller, 1888',
       alt: t('Tegning fra 1888 av tårnbosetningen Khaibakh', 'An 1888 drawing of the Khaibakh tower settlement', 'Рисунок башенного поселка Хайбах 1888 года'),
       caption: t('En sen dokumentasjon av høylandets bygde arkiv.', 'A late record of the highlands’ built archive.', 'Позднее свидетельство архитектурного архива гор.'),
     },
     {
       id: 'shamil-1859', chapterId: 'caucasian-war', sectionId: 'caucasian-war-2', src: 'assets/documentary/shamil-1859.jpg', sourceId: 'shamil-portrait',
+      kind: 'photograph', creator: 'Andrey Denyer', date: '1859', collection: 'Wikimedia Commons',
       sourceUrl: 'https://commons.wikimedia.org/wiki/File:Shamil_by_Denier.jpg', license: 'Public domain', attribution: 'Andrey Denyer, 1859',
       alt: t('Fotografisk portrett av Imam Shamil fra 1859', 'Photographic portrait of Imam Shamil from 1859', 'Фотографический портрет имама Шамиля 1859 года'),
       caption: t('Imam Shamil fotografert året han overga seg ved Gunib.', 'Imam Shamil photographed in the year of his surrender at Gunib.', 'Имам Шамиль в год сдачи в Гунибе.'),
     },
     {
       id: 'grozny-oil-1910', chapterId: 'imperial-rule', sectionId: 'imperial-rule-2', src: 'assets/documentary/grozny-oil-c1910.jpg', sourceId: 'grozny-oil-photo',
+      kind: 'photograph', creator: 'Unknown photographer', date: 'c. 1910', collection: 'Wikimedia Commons',
       sourceUrl: 'https://commons.wikimedia.org/wiki/File:Grozny-j-neft-1915.jpg', license: 'Public domain', attribution: 'Unknown photographer, c. 1910',
       alt: t('Historisk fotografi av oljedistriktet i Grozny omkring 1910', 'Historic photograph of the Grozny oil district around 1910', 'Историческая фотография нефтяного района Грозного около 1910 года'),
       caption: t('Oljefeltene bandt Grozny til jernbane, kapital og imperiets industri.', 'The oil fields tied Grozny to railways, capital, and imperial industry.', 'Нефтяные промыслы связали Грозный с железной дорогой, капиталом и имперской промышленностью.'),
     },
     {
       id: 'lentil-map', chapterId: 'aardakh', sectionId: 'aardakh-1', src: 'assets/documentary/operation-lentil.svg', sourceId: 'lentil-map',
+      kind: 'map', creator: 'Takhirgeran Umar', date: '2016', collection: 'Wikimedia Commons',
       sourceUrl: 'https://commons.wikimedia.org/wiki/File:Operation_Lentil_(Caucasus).svg', license: 'CC BY-SA 4.0', attribution: 'Takhirgeran Umar, 2016',
       alt: t('Kart over deportasjonen under Operasjon Lentil', 'Map of the deportation during Operation Lentil', 'Карта депортации в ходе операции «Чечевица»'),
       caption: t('Kartet viser deportasjonsrutene fra Kaukasus til Sentral-Asia.', 'The map shows deportation routes from the Caucasus to Central Asia.', 'Карта показывает маршруты депортации с Кавказа в Среднюю Азию.'),
     },
+  ];
+
+  const exhibitions = [{
+    id: 'aardakh-exhibition', number: '01', range: '1944–1957', chapterId: 'aardakh', heroMediaId: 'lentil-map',
+    title: t('Aardakh: Deportasjon og tilbakekomst', 'Aardakh: Deportation and Return', 'Аардах: депортация и возвращение'),
+    introduction: t(
+      'Den 23. februar 1944 begynte den kollektive deportasjonen av tsjetsjenere og ingusjere til Sentral-Asia. Utstillingen følger statens dokumenter, deportasjonsrutene, eksilet og den tillatte tilbakekomsten i 1957.',
+      'On 23 February 1944, the collective deportation of Chechens and Ingush to Central Asia began. This exhibition follows the state documents, deportation routes, exile, and the permitted return in 1957.',
+      '23 февраля 1944 года началась коллективная депортация чеченцев и ингушей в Среднюю Азию. Выставка прослеживает государственные документы, маршруты депортации, ссылку и разрешённое возвращение в 1957 году.',
+    ),
+    relatedChapterIds: ['aardakh', 'return'], relatedPersonIds: [], relatedMediaIds: ['lentil-map'],
+    sourceIds: ['ussr1944', 'deport-study', 'tishkov'],
+  }];
+
+  const periods = [
+    { id: 'before-names', range: 'ca. 1200 BCE–500 CE', title: t('Før skriftlige navn', 'Before written names', 'До письменных названий'), chapterIds: ['deep-past'], leadMediaId: null },
+    { id: 'durdzuk-simsim', range: '500–1500', title: t('Durdzuketi og Simsim', 'Durdzuketi and Simsim', 'Дурдзукети и Симсим'), chapterIds: ['durdzuk', 'simsim'], leadMediaId: 'khaibakh-1888' },
+    { id: 'empire-conquest', range: '1500–1917', title: t('Imperium og erobring', 'Empire and conquest', 'Империя и завоевание'), chapterIds: ['frontiers', 'caucasian-war', 'imperial-rule'], leadMediaId: 'shamil-1859' },
+    { id: 'revolution-soviet', range: '1917–1944', title: t('Revolusjon og sovjetisk omforming', 'Revolution and Soviet transformation', 'Революция и советское переустройство'), chapterIds: ['revolution'], leadMediaId: 'grozny-oil-1910' },
+    { id: 'aardakh-return', range: '1944–1990', title: t('Aardakh og tilbakekomst', 'Aardakh and return', 'Аардах и возвращение'), chapterIds: ['aardakh', 'return'], leadMediaId: 'lentil-map' },
+    { id: 'sovereignty-ichkeria', range: '1990–1994', title: t('Suverenitet og Ichkeria', 'Sovereignty and Ichkeria', 'Суверенитет и Ичкерия'), chapterIds: ['ichkeria'], leadMediaId: null },
+    { id: 'wars', range: '1994–2009', title: t('Krigene', 'The wars', 'Войны'), chapterIds: ['second-war'], leadMediaId: null },
+    { id: 'contemporary', range: '2009–2026', title: t('Samtid og diaspora', 'Contemporary Chechnya and diaspora', 'Современность и диаспора'), chapterIds: ['today'], leadMediaId: null },
   ];
 
   const ui = {
@@ -320,5 +347,5 @@
     methodBody: t('Ingen enkelt kilde kan bære hele fortellingen. Arkeologi viser liv uten navn; krøniker navngir gjennom fremmede språk; imperiearkiver registrerer maktens blikk; muntlig historie bevarer lokale erfaringer som aldri nådde et kontor. Vi lar lagene møtes og viser hvor sikkert hvert utsagn er.', 'No single source can carry the whole story. Archaeology shows lives without names; chronicles name them through foreign languages; imperial archives record the gaze of power; oral history preserves local experience that never reached an office. We bring the layers together and show the strength of every claim.', 'Ни один источник не несёт всю историю. Археология показывает жизнь без имён; хроники называют её на чужих языках; имперские архивы фиксируют взгляд власти; устная история хранит местный опыт, не попавший в канцелярии. Мы соединяем слои и показываем степень надёжности каждого утверждения.'),
   };
 
-  return { ui, confidence, volumes, chapters, events, sources, people, places, media };
+  return { ui, confidence, volumes, chapters, events, sources, people, places, media, exhibitions, periods };
 });

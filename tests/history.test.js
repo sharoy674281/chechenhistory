@@ -152,3 +152,29 @@ test('documentary media records have licensing, attribution, and valid chapter p
     for (const lang of ['no', 'en', 'ru']) assert.ok(item.alt[lang], `${item.id}.alt.${lang} is missing`);
   }
 });
+
+test('Aardakh is the curated opening exhibition with documentary media', () => {
+  const exhibition = content.exhibitions[0];
+  assert.equal(exhibition.id, 'aardakh-exhibition');
+  assert.equal(exhibition.chapterId, 'aardakh');
+  assert.ok(content.media.some((item) => item.id === exhibition.heroMediaId));
+  assert.ok(exhibition.sourceIds.includes('ussr1944'));
+});
+
+test('every museum media record includes complete provenance', () => {
+  for (const item of content.media) {
+    for (const key of ['kind', 'creator', 'date', 'collection', 'license', 'sourceUrl']) {
+      assert.ok(item[key], `${item.id}.${key} is missing`);
+    }
+  }
+});
+
+test('museum period index covers the full chronology without unknown chapters', () => {
+  const chapterIds = new Set(content.chapters.map((chapter) => chapter.id));
+  assert.equal(content.periods.length, 8);
+  assert.equal(content.periods[0].chapterIds[0], 'deep-past');
+  assert.equal(content.periods.at(-1).chapterIds.at(-1), 'today');
+  for (const period of content.periods) {
+    for (const id of period.chapterIds) assert.ok(chapterIds.has(id), `${period.id} references unknown chapter ${id}`);
+  }
+});
