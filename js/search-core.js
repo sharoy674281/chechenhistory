@@ -34,6 +34,17 @@
   }
 
   function buildSearchIndex(content, lang = 'en') {
+    const exhibitions = (content.exhibitions || []).map((exhibition) => createItem({
+      id: exhibition.id,
+      type: 'exhibition',
+      label: pick(exhibition.title, lang),
+      description: `${exhibition.range} · ${pick(exhibition.introduction, lang)}`,
+      keywords: [exhibition.range, ...(exhibition.sourceIds || [])],
+      prose: pick(exhibition.introduction, lang),
+      chapterId: exhibition.chapterId,
+      targetId: `exhibition-${exhibition.id}`,
+    }));
+
     const chapters = (content.chapters || []).map((chapter) => createItem({
       id: chapter.id,
       type: 'chapter',
@@ -89,17 +100,32 @@
       targetId: `source-${source.id}`,
     }));
 
-    return [...people, ...places, ...events, ...chapters, ...sources];
+    const media = (content.media || []).map((item) => createItem({
+      id: item.id,
+      type: 'media',
+      label: pick(item.caption, lang),
+      description: `${item.creator} · ${item.date} · ${item.collection}`,
+      keywords: [item.kind, item.creator, item.date, item.collection, item.license],
+      prose: [pick(item.alt, lang), pick(item.caption, lang)].join(' '),
+      chapterId: item.chapterId,
+      targetId: `media-${item.id}`,
+    }));
+
+    return [...exhibitions, ...people, ...places, ...events, ...chapters, ...media, ...sources];
   }
 
   function scoreItem(item, needle) {
     let score = 0;
+    const combined = `${item.canonical} ${item.aliases.join(' ')} ${item.keywords} ${item.prose}`;
+    const tokens = needle.split(' ').filter(Boolean);
     if (item.canonical === needle || item.aliases.includes(needle)) score = 100;
     else if (item.canonical.startsWith(needle) || item.aliases.some((value) => value.startsWith(needle))) score = 80;
     else if (item.canonical.includes(needle) || item.aliases.some((value) => value.includes(needle))) score = 60;
+    else if (tokens.length > 1 && tokens.every((token) => combined.includes(token))) score = 55;
     else if (item.keywords.includes(needle)) score = 35;
     else if (item.prose.includes(needle)) score = 15;
     if (score && item.type === 'person') score += 10;
+    if (score && item.type === 'exhibition') score += 15;
     return score;
   }
 
@@ -113,5 +139,12 @@
       .slice(0, limit);
   }
 
-  return { normalizeSearchText, buildSearchIndex, searchIndex, scoreItem };
+  function groupSearchResults(results) {
+    return (results || []).reduce((groups, item) => {
+      (groups[item.type] ||= []).push(item);
+      return groups;
+    }, {});
+  }
+
+  return { normalizeSearchText, buildSearchIndex, searchIndex, scoreItem, groupSearchResults };
 });

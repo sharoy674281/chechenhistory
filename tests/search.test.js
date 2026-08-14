@@ -25,3 +25,19 @@ test('queries shorter than two characters return no results', () => {
   const index = search.buildSearchIndex(content, 'en');
   assert.deepEqual(search.searchIndex(index, 's'), []);
 });
+
+test('search indexes exhibitions and documentary objects', () => {
+  const index = search.buildSearchIndex(content, 'en');
+  assert.equal(search.searchIndex(index, 'deportation return')[0].type, 'exhibition');
+  assert.ok(search.searchIndex(index, 'operation lentil').some((item) => item.type === 'media'));
+});
+
+test('groupSearchResults retains entity-type order', () => {
+  const grouped = search.groupSearchResults([
+    { type: 'person', id: 'p' },
+    { type: 'event', id: 'e' },
+    { type: 'person', id: 'p2' },
+  ]);
+  assert.deepEqual(Object.keys(grouped), ['person', 'event']);
+  assert.equal(grouped.person.length, 2);
+});
